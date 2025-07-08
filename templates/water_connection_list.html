@@ -1,0 +1,140 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Connection List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            text-decoration: none;
+            color: white;
+            background-color: #5cb85c;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn.update {
+            background-color: #3498db;
+        }
+
+        .btn.delete {
+            background-color: #e74c3c;
+        }
+
+        .btn.deleted-connection {
+            background-color: #d32f2f;
+            display: block;
+            width: max-content;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        /* Success, Error, and Deletion Messages */
+        .message {
+            margin: 20px 0;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .message.deleted {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+    </style>
+</head>
+<body>
+    <h1>Water Connection List</h1>
+
+    <!-- Display any flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <table>
+        <tr>
+            <th>Connection ID</th>
+            <th>Customer ID</th>
+            <th>Connection Date</th>
+            <th>Meter Number</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        {% for connection in water_connections %}
+        <tr>
+            <td>{{ connection[0] }}</td>
+            <td>{{ connection[1] }}</td>
+            <td>{{ connection[2] }}</td>
+            <td>{{ connection[3] }}</td>
+            <td>{{ connection[4] }}</td>
+            <td class="action-buttons">
+                <a href="/delete_connection/{{ connection[0] }}" class="btn delete">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/water_connection">Add New Water Connection</a>
+    <a href="/deleted_connections" class="btn deleted-connection">View Deleted Connections</a>
+</body>
+</html>

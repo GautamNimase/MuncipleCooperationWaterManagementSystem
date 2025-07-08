@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Source Audit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Light solid background color */
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #3498db;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .button {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: block;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Water Source Change Log</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Source ID</th>
+                <th>Old Source Type</th>
+                <th>New Source Type</th>
+                <th>Changed By</th>
+                <th>Change Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for audit in audits %}
+            <tr>
+                <td>{{ audit[0] }}</td> <!-- Assuming SourceID is at index 0 -->
+                <td>{{ audit[1] }}</td> <!-- Assuming OldSourceType is at index 1 -->
+                <td>{{ audit[2] }}</td> <!-- Assuming NewSourceType is at index 2 -->
+                <td>{{ audit[3] }}</td> <!-- Assuming ChangedBy is at index 3 -->
+                <td>{{ audit[4] }}</td> <!-- Assuming ChangeDate is at index 4 -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/water_source_list" class="button">Back to Water Source List</a>
+</body>
+</html>

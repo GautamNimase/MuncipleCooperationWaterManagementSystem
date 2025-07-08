@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Connection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 400px;
+            max-width: 90%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        select:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        input[type="submit"],
+        .show-list-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #5cb85c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+
+        .show-list-button {
+            background-color: #3498db;
+        }
+
+        .show-list-button:hover {
+            background-color: #2980b9;
+        }
+
+        .error, .success {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Water Connection Details</h1>
+    <div class="form-container">
+        <!-- Display Flash Message Here -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="{% if 'success' in messages[0][0] %}success{% else %}error{% endif %}">
+                    {% for category, message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <!-- Form for adding water connection -->
+        <form action="/add_water_connection" method="POST">
+            <label for="connectionDate">Connection Date:</label>
+            <input type="date" id="connectionDate" name="connectionDate" required>
+
+            <label for="meterNumber">Meter Number:</label>
+            <input type="text" id="meterNumber" name="meterNumber" required>
+
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="" disabled selected>Select Status</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+                <option value="Suspended">Suspended</option>
+                <option value="Disconnected">Disconnected</option>
+                <option value="Pending">Pending</option>
+            </select>
+
+            <label for="customerID">Customer ID:</label>
+            <input type="text" id="customerID" name="customerID" required>
+
+            <input type="submit" value="Submit">
+        </form>
+
+        <!-- Button to show water connection list -->
+        <form action="/water_connection_list" method="GET">
+            <button type="submit" class="show-list-button">Show Water Connection List</button>
+        </form>
+    </div>
+</body>
+</html>

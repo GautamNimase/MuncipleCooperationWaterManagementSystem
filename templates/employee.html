@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Light solid background color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            margin: 15px;
+            padding: 10px;
+            background-color: #d4edda; /* Light green for success message */
+            color: #155724; /* Dark green for success message text */
+            border: 1px solid #c3e6cb; /* Border for success message */
+            border-radius: 5px;
+            width: 300px;
+            text-align: center;
+        }
+
+        form {
+            background-color: #fff;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+        }
+
+        label {
+            margin: 10px 0 5px;
+            display: block;
+            color: #34495e;
+        }
+
+        input[type="text"],
+        select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #1abc9c; /* Change border color on focus */
+            outline: none;
+        }
+
+        input[type="submit"],
+        .employee-list-button {
+            background-color: #3498db; /* Blue color for submit button */
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-bottom: 10px; /* Space between buttons */
+        }
+
+        input[type="submit"]:hover,
+        .employee-list-button:hover {
+            background-color: #2980b9; /* Darker shade on hover */
+        }
+
+        .employee-list-button {
+            background-color: #2ecc71; /* Different color for employee list button */
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee Details</h1>
+
+    <!-- Display Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="message">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form action="/add_employee" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="role">Role:</label>
+        <select id="role" name="role" required>
+            <option value="Manager">Manager</option>
+            <option value="Water Supply Technician">Water Supply Technician</option>
+            <option value="Billing Officer">Billing Officer</option>
+            <option value="Customer Service Representative">Customer Service Representative</option>
+            <option value="Meter Reader">Meter Reader</option>
+        </select>
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" required>
+
+        <label for="assignedArea">Assigned Area:</label>
+        <input type="text" id="assignedArea" name="assignedArea" required>
+
+        <input type="submit" value="Submit">
+        <a href="/employee_list"><input type="button" value="Employee List" class="employee-list-button"></a>
+    </form>
+</body>
+</html>

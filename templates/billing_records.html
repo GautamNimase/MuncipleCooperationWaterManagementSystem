@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Records</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .top-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .top-button a {
+            background-color: #27ae60;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .top-button a:hover {
+            background-color: #219150;
+        }
+
+        .backup-button {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .backup-button a {
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        .backup-button a:hover {
+            background-color: #2980b9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 18px;
+            text-align: left;
+        }
+
+        table th, table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .message {
+            color: green;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .update-btn, .delete-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .update-btn {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .update-btn:hover {
+            background-color: #d68910;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .calculate-total-bill {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .calculate-total-bill form {
+            margin-right: auto;
+        }
+
+        .calculate-total-bill label,
+        .calculate-total-bill input {
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        .calculate-total-bill input[type="submit"] {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .calculate-total-bill input[type="submit"]:hover {
+            background-color: #219150;
+        }
+    </style>
+</head>
+<body>
+    <!-- Button to calculate bill -->
+    <div class="top-button">
+        <a href="/calculate_bill">Calculate Total Bill</a>
+    </div>
+
+    <h1>All Billing Records</h1>
+
+    <!-- Display any flash messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="message">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <table>
+        <tr>
+            <th>Bill ID</th>
+            <th>Bill Date</th>
+            <th>Amount</th>
+            <th>Payment Status</th>
+            <th>Customer ID</th>
+            <th>Connection ID</th>
+            <th>Actions</th>
+        </tr>
+        {% for record in billing_data %}
+        <tr>
+            <td>{{ record[0] }}</td>
+            <td>{{ record[1] }}</td>
+            <td>{{ record[2] }}</td>
+            <td>{{ record[3] }}</td>
+            <td>{{ record[4] }}</td>
+            <td>{{ record[5] }}</td>
+            <td class="action-buttons">
+                <a href="/update_billing/{{ record[0] }}">
+                    <button class="update-btn">Update</button>
+                </a>
+                <form action="/delete_billing/{{ record[0] }}" method="POST" style="display:inline;">
+                    <input type="submit" value="Delete" class="delete-btn">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="backup-button">
+        <a href="/billing_backup">Billing Backup</a>
+    </div>
+
+    </div>
+    <a href="/billing">Add New Bill Details</a>
+    </div>
+    
+    </div>
+</body>
+</html>

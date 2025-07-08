@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Water Source</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Light solid background color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #34495e;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            width: 320px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+            color: #2c3e50;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+            color: #34495e;
+            appearance: none;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #2980b9;
+            outline: none;
+            background-color: #eef7fc;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #5cb85c; /* Submit button color */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 15px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #4cae4c; /* Hover color for submit */
+        }
+
+        .water-source-list-btn {
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db; /* Common color for both buttons */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .water-source-list-btn:hover {
+            background-color: #2980b9; /* Hover color for list button */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 400px) {
+            .form-container {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Update Water Source</h1>
+    <div class="form-container">
+        <form action="/update_water_source/{{ source[0] }}" method="post">
+            <label for="sourceName">Source Name:</label>
+            <input type="text" id="sourceName" name="sourceName" value="{{ source[1] }}" required>
+            
+            <label for="sourceType">Source Type:</label>
+            <select id="sourceType" name="sourceType" required>
+                <option value="" disabled>Select Source Type</option>
+                <option value="Surface Water" {% if source[2] == 'Surface Water' %}selected{% endif %}>Surface Water</option>
+                <option value="Groundwater" {% if source[2] == 'Groundwater' %}selected{% endif %}>Groundwater</option>
+                <option value="Rainwater Harvesting" {% if source[2] == 'Rainwater Harvesting' %}selected{% endif %}>Rainwater Harvesting</option>
+                <option value="Borewell" {% if source[2] == 'Borewell' %}selected{% endif %}>Borewell</option>
+                <option value="Spring" {% if source[2] == 'Spring' %}selected{% endif %}>Spring</option>
+            </select>        
+            
+            <label for="capacity">Capacity:</label>
+            <input type="text" id="capacity" name="capacity" value="{{ source[3] }}" required>
+            
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" value="{{ source[4] }}" required>
+            
+            <input type="submit" value="Update">
+        </form>
+        <a href="/water_source_list" class="water-source-list-btn">Back to Water Source List</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meter Reading</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            max-width: 90%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        /* Style for buttons */
+        .btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin-bottom: 15px;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        /* Different colors for each button */
+        .submit-btn {
+            background-color: #5cb85c;
+        }
+        .submit-btn:hover {
+            background-color: #4cae4c;
+        }
+
+        .list-btn {
+            background-color: #007bff;
+        }
+        .list-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Message styling */
+        .message {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 90%;
+        }
+
+        .success-message {
+            color: green;
+            background-color: #e8f5e9;
+            border: 1px solid #4caf50;
+        }
+
+        .error-message {
+            color: red;
+            background-color: #ffebee;
+            border: 1px solid #ec4a3f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Meter Reading Details</h1>
+
+    <!-- Display any flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="message {% if category == 'success' %}success-message{% elif category == 'error' %}error-message{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="form-container">
+        <form action="/add_meter_reading" method="POST">
+            <label for="readingDate">Reading Date:</label>
+            <input type="date" id="readingDate" name="readingDate" required>
+
+            <label for="unitsConsumed">Units Consumed:</label>
+            <input type="text" id="unitsConsumed" name="unitsConsumed" required>
+
+            <label for="connectionID">Connection ID:</label>
+            <input type="text" id="connectionID" name="connectionID" required>
+
+            <button type="submit" class="btn submit-btn">Submit</button>
+        </form>
+
+        <a href="{{ url_for('meter_readings') }}" class="btn list-btn">Meter Reading List</a>
+    </div>
+</body>
+</html>

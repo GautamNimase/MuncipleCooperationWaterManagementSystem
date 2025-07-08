@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Backup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #8e44ad;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a.button {
+            text-decoration: none;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Customer Backup List</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>CustomerID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Connection Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers_backup %}
+            <tr>
+                <td>{{ customer.CustomerID }}</td>
+                <td>{{ customer.Name }}</td>
+                <td>{{ customer.Address }}</td>
+                <td>{{ customer.Phone }}</td>
+                <td>{{ customer.Email }}</td>
+                <td>{{ customer.ConnectionType }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="/view_customers" class="button">Back to Customer List</a>
+
+</body>
+</html>

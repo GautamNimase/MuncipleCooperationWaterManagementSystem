@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meter Readings List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin: 20px 0;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #5cb85c;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Meter Readings List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Reading Date</th>
+                <th>Units Consumed</th>
+                <th>Connection ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reading in readings %}
+            <tr>
+                <td>{{ reading.ReadingDate }}</td>
+                <td>{{ reading.UnitsConsumed }}</td>
+                <td>{{ reading.ConnectionID }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        <a href="/meter_reading">Add New Meter Reading</a>
+</body>
+</html>

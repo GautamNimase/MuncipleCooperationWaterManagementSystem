@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home - Water Supply System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Light solid background color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #34495e;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .box {
+            background-color: #fff;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            width: 150px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+        }
+
+        .box:hover {
+            background-color: #3498db;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        .box a {
+            text-decoration: none;
+            color: inherit;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Municipal Corporation Water Management System</h1>
+    <p>Select an option below to manage the system:</p>
+    <div class="container">
+        <div class="box"><a href="/customer">Customer</a></div>
+        <div class="box"><a href="/billing">Billing</a></div>
+        <div class="box"><a href="/meter_reading">Meter Reading</a></div>
+        <div class="box"><a href="/water_connection">Water Connection</a></div>
+        <div class="box"><a href="/employee">Employee</a></div>
+        <div class="box"><a href="/water_source">Water Source</a></div>
+    </div>
+</body>
+</html>
